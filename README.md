@@ -15,7 +15,7 @@ Warning: if you want to use it in multiple places on one page, you should includ
 <script src="/js/easygooglemaps.js"></script>
 ```
 
-###Step 2: Call the easyGoogleMaps Norbert
+###Step 2: Call the easyGoogleMaps
 
 
 ```javascript
