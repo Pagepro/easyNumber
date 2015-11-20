@@ -128,7 +128,7 @@ You can pass configuration options in data attribute of input element:
 $(document).ready(function(){
   $('.quantity').easyNumbers({
     plus: 'plus',
-    minus: 'minus,
+    minus: 'minus',
     readonly: true,
     allowNegative: true,
     dateFormat: 'DD-MM-YYYY',
