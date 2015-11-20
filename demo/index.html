@@ -16,15 +16,17 @@
     </head>
     <body>
         <main>
-            <input type="number" name="qty" class="js-easynumber" value="1" />
+            <input type="number" name="qty" class="js-easynumber"/>
         </main>
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="../src/easynumber.js"></script>
         <script>
         $(document).on('ready', function () {
             $('.js-easynumber').easyNumber({
-                readonly: false,
-                validation: 'numbers'
+                readonly: true,
+                type: 'int',
+                zero: null,
+                allowNegative: false
             });
         });
         </script>

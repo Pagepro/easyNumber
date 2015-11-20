@@ -1,100 +1,141 @@
-#easyGoogleMaps
+#easyNumbers
 
 
 ###Benefits
-* You can easily add Google Maps to your website.
-* Google Maps API is loaded in the background.
+* You can easily change numbers in inputs.
+* Operated increment or decrement of input value by define buttons.
+* Easily set readonly, format and validation of input value.
 
-Warning: if you want to use it in multiple places on one page, you should include Google Maps library manually.
 
 ##Installation
 
 ###Step 1: Link plugin file
 
 ```html
-<script src="/js/easygooglemaps.js"></script>
+<script src="/js/easynumber.js"></script>
 ```
 
-###Step 2: Call the easyGoogleMaps
+###Step 2: Call the easyNumber
 
 
 ```javascript
 $(document).ready(function(){
-  $('.map-wrap').easyGoogleMaps({
-    lat: 1.276816,
-    lng: 103.848346,
-    zoom: 13
-  });
+  $('.quantity').easyNumber()
 });
 ```
+
+##Default options
+
+```javascript
+defaults = {
+    plus: '+',
+    minus: '-',
+    readonly: true,
+    allowNegative: false,
+    dateFormat: 'DD-MM-YYYY',
+    timeFormat: 'HH:mm',
+    type: 'int',
+    validation: false,
+    zero: null
+};
+
+```
+
 
 ##Configuration options
 
 
-**lat**
-Google Maps Latitude
+**plus**
+It's a button to increment the value.
 ```
-default: '1.276816'
-options: latitude
-```
-
-**lng**
-Google Maps Longitude
-```
-default: '103.848346'
-options: latitude
+default: '+'
+options: string
+example: 'plus'
 ```
 
-**zoom**
-Google Maps Zoom
+**minus**
+It's a button to decrement the value.
 ```
-default: '13'
-options: int
+default: '-'
+options: string
+example: 'minus'
 ```
 
-**randomId**
-Change id attribute of map container element.
+**readonly**
+Sets up read only options to your input.
 ```
-default: true
+default: 'true'
+options: boolean
+```
+
+**allowNegative**
+Allows to set negative numbers in input.
+```
+default: false
 options: bool
 ```
 
-**tooltip**
-HTML of tooltip visible after clicking on map marker.
+**dateFormat**
+Sets up yours date format.
 ```
-default: false
+default: 'DD-MM-YYYY'
 options: string
+example: '20-11-2015'
 ```
 
-**styles**
-Style array, you can get some from: http://snazzymaps.com
+**timeFormat**
+Sets up yours time format.
 ```
-default: false
-options: array
+default: 'HH:mm'
+options: string
+example: '12:59'
 ```
 
+**type**
+Sets up type of input and increments, decrements value.
+```
+default: 'int'
+options: int, data, time
+
+```
+
+**validation**
+Check that user introduces right value input.
+```
+default: 'false'
+option: numbers
+
+```
+
+**zero**
+Sets up starts input value.
+```
+default: null
+options: number
+
+```
 ##Alternative configuration
 
-You can pass configuration options in data attribute of map container element:
+You can pass configuration options in data attribute of input element:
 
 ```html
-<div class="map-wrapper" data-options='{"lat": "52.224844", "lng": "20.957212"}'>
+<input type="number" class="quantity" data-options='{"min": "minus", "max": "maximum"}'>
 ```
 
 ##Full features example
 
-You can pass configuration options in data attribute of map container element:
-
 ```javascript
 $(document).ready(function(){
-  $('.map-wrap').easyGoogleMaps({
-    lat: 1.276816,
-    lng: 103.848346,
-    zoom: 13,
-    randomId: true,
-    markerIcon: '',
-    tooltip: '<p>You`ve clicked on marker!</p>',
-    styles: [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}]
+  $('.quantity').easyNumbers({
+    plus: 'plus',
+    minus: 'minus,
+    readonly: true,
+    allowNegative: true,
+    dateFormat: 'DD-MM-YYYY',
+    timeFormat: 'HH:mm',
+    type: 'int',
+    validation: 'true',
+    zero: null
   });
 });
 ```
