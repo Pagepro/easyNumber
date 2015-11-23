@@ -9,7 +9,7 @@
   "homepage": "#",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pagepro/easyGoogleMaps.git"
+    "url": "https://github.com/Pagepro/easyNumber.git"
   },
   "author": {
     "name": "Pagepro",
@@ -27,5 +27,5 @@
     "jquery": "1.11.2"
   },
   "version": "0.1.5",
-  "main": "dist/easygooglemaps.js"
+  "main": "dist/easynumbers.js"
 }
