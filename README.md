@@ -2,7 +2,7 @@
 
 
 ###Benefits
-* You can easily change numbers in inputs.
+* You can easily change value in inputs.
 * Operated increment or decrement of input value by define buttons.
 * Easily set readonly, format and validation of input value.
 

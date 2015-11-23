@@ -1,0 +1,142 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html lang="" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>easyNumber</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="stylesheets/styles.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="static/js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+    <div class="wrapper">
+        <header>
+            <h1>EasyNumber</h1>
+            <p>EasyNumber plugin can easily change value in inputs</p>
+            <p class="view">
+                <a href="https://github.com/Pagepro/AsosZoom">View the Project on GitHub <small>Pagepro/easyNumber</small></a>
+            </p>
+            <ul>
+                <li><a href="https://github.com/Pagepro/easyNumber/zipball/master">Download <strong>ZIP File</strong></a></li>
+                <li><a href="https://github.com/Pagepro/easyNumber/tarball/master">Download <strong>TAR Ball</strong></a></li>
+                <li><a href="https://github.com/Pagepro/easyNumber">View On <strong>GitHub</strong></a></li>
+            </ul>
+        </header>
+        <main>
+            <h1>EasyNumber plugin examples</h1>
+            <div class="box">
+                <h3 class='example-title'>Example 1</h3>
+                <p class='desc'>Input with default options.</p>
+                <input type="number" name="qty" id="js-easynumber-0"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 2</h3>
+                <p class='desc'>Input with button to increment or decrement customize by user .</p>
+                <input type="number" name="qty" id="js-easynumber-1"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 3</h3>
+                <p class='desc'>Input with readonly option.</p>
+                <input type="number" name="qty" id="js-easynumber-2"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 3</h3>
+                <p class='desc'>Input without readonly option.</p>
+                <input type="number" name="qty" id="js-easynumber-3"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 4</h3>
+                <p class='desc'>Input disallow to set negativ value.</p>
+                <input type="number" name="qty" id="js-easynumber-4"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 5</h3>
+                <p class='desc'>Input allow to set negativ value.</p>
+                <input type="text" name="qty" id="js-easynumber-5"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 6</h3>
+                <p class='desc'>Input type option data.</p>
+                <input type="text" name="qty" id="js-easynumber-6" value='01-01-2015'/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 7</h3>
+                <p class='desc'>Input with option time.</p>
+                <input type="text" name="qty" id="js-easynumber-7" value='00:00'/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 8</h3>
+                <p class='desc'>Input with disable validation option.</p>
+                <input type="text" name="qty" id="js-easynumber-8"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 9</h3>
+                <p class='desc'>Input with enable validation option.</p>
+                <input type="text" name="qty" id="js-easynumber-9"/>
+            </div>
+            <div class="box">
+                <h3 class='example-title'>Example 10</h3>
+                <p class='desc'>Input wchich start value is another number that 0 (example 40).</p>
+                <input type="text" name="qty" id="js-easynumber-10"/>
+            </div>
+        </main>
+        <footer>
+            <p>This project is maintained by <a href="https://github.com/Pagepro">Pagepro</a></p>
+            <p>
+                <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small>
+            </p>
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+        <script src="src/easynumber.js"></script>
+        <script>
+        $(document).on('ready', function () {
+            $('#js-easynumber-0').easyNumber();
+            $('#js-easynumber-1').easyNumber({
+                plus: 'plus',
+                minus: 'minus',
+            });
+            $('#js-easynumber-2').easyNumber({
+                readonly: true,
+                allowNegative: false
+            });
+            $('#js-easynumber-3').easyNumber({
+                readonly: false
+                
+            });
+            $('#js-easynumber-4').easyNumber({
+                allowNegative: false
+                
+            });
+             $('#js-easynumber-5').easyNumber({
+                allowNegative: true
+                
+            });
+            $('#js-easynumber-6').easyNumber({
+                type: 'day'
+            });
+            $('#js-easynumber-7').easyNumber({
+                type: 'time' 
+            });
+            $('#js-easynumber-8').easyNumber({
+                validation: false 
+            });
+            $('#js-easynumber-9').easyNumber({
+                readonly: false,
+                validation: true 
+            });
+            $('#js-easynumber-10').easyNumber({
+                zero: 40 
+            });
+        });
+        </script>
+    </body>
+</html>
