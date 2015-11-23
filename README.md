@@ -6,6 +6,8 @@
 * Operated increment or decrement of input value by define buttons.
 * Easily set readonly, format and validation of input value.
 
+##Requirements
+1. If you want use easyNumbers to date or time value, you need link Moment.js to your project.
 
 ##Installation
 
