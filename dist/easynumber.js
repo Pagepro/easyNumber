@@ -1,5 +1,4 @@
-/*globals jQuery, window, document */
-(function ($) {
+module.exports = function() {
     "use strict";
     var pluginName = "easyNumber",
         defaults = {
@@ -28,13 +27,16 @@
             var that = this;
             if (this.$element.is('input:text') || this.$element.is('input[type="number"]')) {
                 this.prepareHtml();
+                if(this.settings.zero !== null){
+                    this.$element.val(this.settings.zero);
+                }
                 this.bindEvents();
             }
         },
         prepareHtml: function () {
             this.$element.wrap('<div class="easyNumber" />');
             this.$parent = this.$element.parent();
-            this.$parent.append('<a class="easyNumber__plus" href="#">' + this.settings.plus + '</a><a class="easyNumber__minus" href="#">' + this.settings.minus + '</a>');
+            this.$parent.append(' <a class="easyNumber__plus" href="#">' + this.settings.plus + '</a> <a class="easyNumber__minus" href="#">' + this.settings.minus + '</a>');
             if (this.settings.readonly) {
                 this.$element.prop('readonly', true);
             }
@@ -96,7 +98,7 @@
         },
         updateTime: function (increment) {
             var currentValue = this.$element.val(),
-                newValue = '';
+                newValue = '00:00';
             newValue = increment ? moment(currentValue, this.settings.timeFormat).add('1', 'minutes').format(this.settings.timeFormat) : moment(currentValue, this.settings.timeFormat).subtract('1', 'minutes').format(this.settings.timeFormat);
             this.$element.val(newValue).attr('value', newValue).trigger('change');
         }
@@ -108,4 +110,4 @@
             }
         });
     };
-}(jQuery));
+}(jQuery);

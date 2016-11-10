@@ -1,5 +1,4 @@
-/*globals jQuery, window, document */
-(function ($) {
+module.exports = function() {
     "use strict";
     var pluginName = "easyNumber",
         defaults = {
@@ -111,4 +110,4 @@
             }
         });
     };
-}(jQuery));
+}(jQuery);

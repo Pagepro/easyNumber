@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src',
                         src: ['*.js'],
-                        dest: 'dist/'
+                        dest: 'dist/',
                     }
                 ]
             }
@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         uglify: {
             all: {
                 files: {
-                    'dist/easynumber.min.js': 'src/easynumber.js'
+                    'index.js': 'src/easynumber.js'
                 }
             }
         },
