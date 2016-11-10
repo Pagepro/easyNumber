@@ -11,19 +11,17 @@
 
 ##Installation
 
-###Step 1: Link plugin file
+###Step 1: Install
 
-```html
-<script src="/js/easynumber.js"></script>
+```javascript
+npm install easynumber
 ```
 
 ###Step 2: Call the easyNumber
 
 
 ```javascript
-$(document).ready(function(){
-  $('.quantity').easyNumber()
-});
+$('.quantity').easyNumber()
 ```
 
 ##Default options
