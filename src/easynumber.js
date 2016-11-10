@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 module.exports = function() {
     "use strict";
     var pluginName = "easyNumber",
