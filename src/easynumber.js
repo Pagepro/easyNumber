@@ -1,4 +1,4 @@
-var jQuery = require('jquery');
+var $ = require('jquery');
 
 module.exports = function() {
     "use strict";
@@ -112,4 +112,4 @@ module.exports = function() {
             }
         });
     };
-}(jQuery);
+}($);
