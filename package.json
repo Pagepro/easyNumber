@@ -16,13 +16,12 @@
     "url": "http://pagepro.pl"
   },
   "devDependencies": {
-    "grunt": "^0.4.2",
-    "grunt-contrib-compass": "~0.5.0",
-    "grunt-contrib-watch": "^0.5.3",
-    "grunt-contrib-copy": "^0.5.0",
-    "matchdep": "^0.3.0",
-    "jquery": "1.11.2"
+    "browser-sync": "2.13.0",
+    "gulp": "3.9.1",
+    "run-sequence": "1.2.2",
+    "gulp-rename": "^1.2.2",
+    "jquery": "3.0.0"
   },
-  "version": "0.1.75",
+  "version": "0.1.76",
   "main": "index.js"
 }
