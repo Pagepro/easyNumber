@@ -17,7 +17,13 @@
 npm install easynumber
 ```
 
-###Step 2: Call the easyNumber
+###Step 2: Add module in ES6
+
+```javascript
+import easynumber from 'easynumber';
+```
+
+###Step 3: Call the easyNumber
 
 
 ```javascript

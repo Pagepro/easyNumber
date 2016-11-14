@@ -23,6 +23,6 @@
     "matchdep": "^0.3.0",
     "jquery": "1.11.2"
   },
-  "version": "0.1.74",
+  "version": "0.1.75",
   "main": "index.js"
 }
