@@ -3,21 +3,10 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         copy: {
             dev: {
-                files: [
+                files:
                     {
-                        expand: true,
-                        cwd: 'src',
-                        src: ['*.js'],
-                        dest: 'dist/',
+                        'index.js': 'src/easynumber.js'
                     }
-                ]
-            }
-        },
-        uglify: {
-            all: {
-                files: {
-                    'index.js': 'src/easynumber.js'
-                }
             }
         },
         connect: {
@@ -33,5 +22,5 @@ module.exports = function (grunt) {
     // Load the plugin
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     // Default task(s).
-    grunt.registerTask('default', ['copy:dev', 'uglify:all']);
+    grunt.registerTask('default', ['copy:dev']);
 };
