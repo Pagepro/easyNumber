@@ -128,6 +128,23 @@ You can pass configuration options in data attribute of input element:
 <input type="number" class="quantity" data-options='{"min": "minus", "max": "maximum"}'>
 ```
 
+##Addictiona options
+
+  There are additional configuration options passed by data attribute on individual input
+
+
+  1. Allowed float values on input
+
+```html
+<input data-qty-float-val="true" class="quantity" type="text">
+```
+
+  2. Changed incrementation value.
+
+```html
+<input data-qty-for-change="10" class="quantity" type="text">
+```
+
 ##Full features example
 
 ```javascript

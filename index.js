@@ -16,17 +16,21 @@ module.exports = function() {
         };
     // The actual plugin constructor
     function Plugin(element, options) {
-        this.element        =   element;
-        this.$element       =   $(this.element).addClass('easyNumber__input');
-        this.$parent        =   null;
-        this.settings       =   $.extend({}, defaults, options);
-        this.settings.min   = this.$element.data('min') ? this.$element.data('min') : false;
-        this.settings.max   = this.$element.data('max') ? this.$element.data('max') : false;
+        this.element = element;
+        this.$element = $(this.element).addClass('easyNumber__input');
+        this.$parent = null;
+        this.settings = $.extend({}, defaults, options);
+        this.settings.min = this.$element.data('min') ? this.$element.data('min') : false;
+        this.settings.max = this.$element.data('max') ? this.$element.data('max') : false;
+        this.settings.incrementationValue = $(this.element).data('qty-for-change') ? $(this.element).data('qty-for-change') : 1;
+        this.settings.floatEnable = $(this.element).data('qty-float-val') ? $(this.element).data('qty-float-val') : false;
         this.init();
     }
     Plugin.prototype = {
         init: function () {
-            var that = this;
+            var that = this,
+                fractionDigs;
+
             if (this.$element.is('input:text') || this.$element.is('input[type="number"]')) {
                 this.prepareHtml();
                 if(this.settings.zero !== null){
@@ -38,7 +42,7 @@ module.exports = function() {
         prepareHtml: function () {
             this.$element.wrap('<div class="easyNumber" />');
             this.$parent = this.$element.parent();
-            this.$parent.append(' <a class="easyNumber__plus" href="#">' + this.settings.plus + '</a> <a class="easyNumber__minus" href="#">' + this.settings.minus + '</a>');
+            this.$parent.append(' <a class="easyNumber__plus" href="#"><span class="icon icon--arrow--up"></span><span class="label">' + this.settings.plus + '</span></a> <a class="easyNumber__minus" href="#"><span class="icon icon--arrow--down"></span><span class="label">' + this.settings.minus + '</span></a>');
             if (this.settings.readonly) {
                 this.$element.prop('readonly', true);
             }
@@ -53,10 +57,13 @@ module.exports = function() {
                 e.preventDefault();
                 that.update(false);
             });
+            this.$parent.find('input').on('blur', function (e) {
+                that.enteredValue();
+            });
             if (this.settings.validation) {
                 if (this.settings.validation === 'numbers') {
                     this.$element.on('keypress', function (e) {
-                        return e.charCode > 47 && e.charCode < 58;
+                        return (e.charCode > 47 && e.charCode < 58) || e.charCode == 44 || e.charCode == 46;
                     });
                 }
             }
@@ -70,11 +77,29 @@ module.exports = function() {
                 this.updateInt(increment);
             }
         },
+        countDecimals: function (value) {
+            return value % 1?value.toString().split('.')[1].length:0;
+        },
         updateInt: function (increment) {
-            var currentValue = (this.$element.val() === this.settings.zero || !this.$element.val().length) ? 0 : parseInt(this.$element.val(), 10),
-                newValue = increment ? (currentValue + 1) : (currentValue - 1),
+            var currentValue,
+                newValue,
+                qtyValue,
+                fractionDigs,
                 newValueFormatted = false;
-            newValue = parseInt(newValue, 10);
+
+            if (this.settings.floatEnable) {
+                currentValue = (this.$element.val() === this.settings.zero || !this.$element.val().length) ? 0 : parseFloat(this.$element.val().replace(',', '.')),
+                fractionDigs = this.countDecimals(currentValue);
+
+                newValue = increment ? (currentValue + 1) : (currentValue - 1),
+                newValue = newValue.toFixed(fractionDigs);
+                newValueFormatted = false;
+            } else {
+                currentValue = (this.$element.val() === this.settings.zero || !this.$element.val().length) ? 0 : parseInt(this.$element.val(), 10),
+                newValue = increment ? (currentValue + this.settings.incrementationValue) : (currentValue - this.settings.incrementationValue),
+                newValueFormatted = false;
+                newValue = parseInt(newValue, 10);
+            }
             if (!this.settings.allowNegative && newValue < 1) {
                 newValue = 0;
             }
@@ -86,6 +111,39 @@ module.exports = function() {
             } else {
                 this.$element.val(newValueFormatted ? newValueFormatted : newValue);
             }
+        },
+        enteredValue: function () {
+            var qtyValue,
+                newValue,
+                currentValue = this.$element.val().replace(',', '.') || 0,
+                $productMsg = $(this.element).closest($('.field--number')).find('.std-msg');
+
+            if (this.settings.floatEnable) {
+                return;
+            }
+
+            if ((currentValue % this.settings.incrementationValue > 1) || (this.settings.incrementationValue == 1 && (currentValue % 1 !== 0))) {
+                if (currentValue < this.settings.incrementationValue) {
+                // round to the nearest qty in packag
+                    qtyValue = this.settings.incrementationValue;
+                } else {
+                    qtyValue = Math.ceil(currentValue / this.settings.incrementationValue) * this.settings.incrementationValue;
+                }
+                $productMsg.show();
+            } else if (((currentValue % this.settings.incrementationValue) > 0) && ((currentValue % this.settings.incrementationValue) < 1)) {
+                currentValue = parseInt(currentValue, 10);
+                qtyValue = currentValue + this.settings.incrementationValue
+                $productMsg.show();
+            } else {
+                qtyValue = currentValue;
+            }
+            qtyValue = parseInt(qtyValue, 10);
+            newValue = qtyValue.toString();
+            this.$element.val(newValue);
+            setTimeout(function (){
+                $productMsg.fadeOut();
+            }, 2000);
+
         },
         updateDay: function (increment) {
             var currentValue = this.$element.val(),
@@ -107,8 +165,11 @@ module.exports = function() {
     };
     $.fn[pluginName] = function (options) {
         return this.each(function () {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+            if (this.name === 'e_qty') {
+                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+            }
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
             }
         });
     };
